@@ -6,6 +6,7 @@ import java.util.List;
 
 public class OrderRequest {
     private List<Drink> drinks;
+    private String paymentMethod;
 
     public OrderRequest() {}
 
@@ -15,5 +16,13 @@ public class OrderRequest {
 
     public void setDrinks(List<Drink> drinks) {
         this.drinks = drinks;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 }

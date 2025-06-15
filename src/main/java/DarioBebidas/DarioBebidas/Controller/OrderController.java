@@ -5,6 +5,7 @@ import DarioBebidas.DarioBebidas.Repository.DrinkRepository;
 import DarioBebidas.DarioBebidas.Repository.OrderRepository;
 import DarioBebidas.DarioBebidas.model.Drink;
 import DarioBebidas.DarioBebidas.model.Orders;
+import jakarta.persistence.criteria.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +16,9 @@ import java.util.Map;
 @RequestMapping("/api/orders")
 @CrossOrigin(origins = "http://localhost:3000")
 public class OrderController {
-
+    @Autowired
     private final DrinkRepository drinkRepository;
+    @Autowired
     private final OrderRepository orderRepository;
 
     @Autowired
@@ -36,7 +38,6 @@ public class OrderController {
             Orders order = new Orders(drinks, orderRequest.getPaymentMethod());
             orderRepository.save(order);
 
-            // 🖨️ Logs no console
             System.out.println("🛒 Novo pedido recebido!");
             System.out.println("📦 Bebidas:");
             drinks.forEach(d -> System.out.println("- " + d.getName()));
@@ -64,4 +65,9 @@ public class OrderController {
                 .orElse(ResponseEntity.status(404).body("Pedido não encontrado"));
     }
 
+    @GetMapping("/user")
+    public List<Orders> getOrdersByUser(@RequestParam Long userId) {
+        return orderRepository.findByUserId(userId);
+    }
 }
+

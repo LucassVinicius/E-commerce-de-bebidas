@@ -29,12 +29,22 @@ public class Orders {
     private String status;
     private LocalDateTime orderTime;
     private LocalDateTime estimatedDeliveryTime;
+    private String deliveryAddress;
+
+    public String getDeliveryAddress() {
+        return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(String deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
+    }
 
     public Orders() {}
 
-    public Orders(List<Drink> drinks, String paymentMethod) {
+    public Orders(List<Drink> drinks, String paymentMethod, String deliveryAddress) {
         this.drinks = drinks;
         this.paymentMethod = paymentMethod;
+        this.deliveryAddress = deliveryAddress;
         this.status = "AGUARDANDO";
         this.orderTime = LocalDateTime.now();
         this.estimatedDeliveryTime = this.orderTime.plusMinutes(30); // simula 30 min

@@ -17,7 +17,12 @@ public class OrderService {
     }
 
     public Orders createOrder(OrderRequest request) {
-        Orders order = new Orders(request.getDrinks(), request.getPaymentMethod());
+        Orders order = new Orders(
+                request.getDrinks(),                 // Lista de Drinks
+                request.getPaymentMethod(),          // Método de Pagamento
+                request.getDeliveryAddress()         // Endereço de Entrega
+        );
+
         return orderRepository.save(order);
     }
 

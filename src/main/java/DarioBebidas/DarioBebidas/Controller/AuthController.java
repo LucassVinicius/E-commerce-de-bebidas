@@ -13,9 +13,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -36,6 +39,22 @@ public class AuthController {
 
     @Autowired
     private JwtUtil jwtUtil;
+
+    @PostMapping("/recruiter-login")
+    public ResponseEntity<?> loginAsRecruiter() {
+        User adminUser = userRepository.findByEmail("recruiter@gmail.com")
+                .orElseThrow(() -> new RuntimeException("Usuário recrutador não encontrado"));
+
+        UserDetails userDetails = new org.springframework.security.core.userdetails.User(
+                adminUser.getEmail(),
+                adminUser.getPassword(),
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"))
+        );
+
+        String token = jwtUtil.generateToken(userDetails);
+
+        return ResponseEntity.ok(new AuthResponse(token));
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest request) {

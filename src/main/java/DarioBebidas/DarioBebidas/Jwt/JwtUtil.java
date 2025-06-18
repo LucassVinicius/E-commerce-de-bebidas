@@ -23,7 +23,15 @@ public class JwtUtil {
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("authorities", userDetails.getAuthorities());
+
+        // Pega o primeiro papel da lista de authorities e salva como "role"
+        String role = userDetails.getAuthorities().stream()
+                .findFirst()
+                .map(Object::toString)
+                .orElse("USER");
+
+        claims.put("role", role); // <- ESSENCIAL
+        claims.put("authorities", userDetails.getAuthorities()); // opcional
 
         return Jwts.builder()
                 .setClaims(claims)

@@ -42,9 +42,12 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/api/auth/**", "/api/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+                        .requestMatchers( "/api/auth/**").permitAll()
+                        .requestMatchers("/api/orders/**").authenticated()
+                        .requestMatchers("/api/drinks").permitAll()
                         .requestMatchers("/uploads/**").permitAll()
+                        .requestMatchers("/api/user/me").authenticated()
+                        .requestMatchers("/api/orders/**/cancel").authenticated()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess

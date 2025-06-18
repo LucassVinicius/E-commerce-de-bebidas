@@ -1,17 +1,12 @@
 package DarioBebidas.DarioBebidas.Controller;
-
-import DarioBebidas.DarioBebidas.Dto.DrinkRequest;
-import DarioBebidas.DarioBebidas.Repository.DrinkRepository;
 import DarioBebidas.DarioBebidas.Service.DrinkService;
 import DarioBebidas.DarioBebidas.model.Drink;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -42,13 +37,11 @@ public class DrinkController {
             @RequestParam("price") Double price,
             @RequestParam("imageURL") MultipartFile imageURL
     ) {
-        // Criar diretório "uploads" se não existir
         File uploadDir = new File("uploads");
         if (!uploadDir.exists()) {
             uploadDir.mkdirs();
         }
 
-        // Salvar imagem
         String fileName = Paths.get(imageURL.getOriginalFilename()).getFileName().toString();
         Path imagePath = Paths.get("uploads", fileName);
         try {
@@ -57,11 +50,10 @@ public class DrinkController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
 
-        // Criar e salvar drink
         Drink drink = new Drink();
         drink.setName(name);
         drink.setPrice(price);
-        drink.setImageURL("/uploads/" + fileName); // caminho acessível pelo navegador
+        drink.setImageURL("/uploads/" + fileName);
 
         return ResponseEntity.ok(drinkService.addDrink(drink));
     }

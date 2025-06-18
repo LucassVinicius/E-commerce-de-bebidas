@@ -1,12 +1,10 @@
 package DarioBebidas.DarioBebidas.Controller;
-
 import DarioBebidas.DarioBebidas.Dto.AuthRequest;
 import DarioBebidas.DarioBebidas.Dto.AuthResponse;
 import DarioBebidas.DarioBebidas.Dto.RegisterRequest;
 import DarioBebidas.DarioBebidas.Jwt.JwtUtil;
 import DarioBebidas.DarioBebidas.Repository.UserRepository;
 import DarioBebidas.DarioBebidas.Service.MyUserDetailsService;
-
 import DarioBebidas.DarioBebidas.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +15,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Collections;
 
 @RestController

@@ -1,5 +1,4 @@
 package DarioBebidas.DarioBebidas.Controller;
-
 import DarioBebidas.DarioBebidas.Dto.OrderRequest;
 import DarioBebidas.DarioBebidas.Repository.DrinkRepository;
 import DarioBebidas.DarioBebidas.Repository.OrderRepository;
@@ -7,7 +6,6 @@ import DarioBebidas.DarioBebidas.Repository.UserRepository;
 import DarioBebidas.DarioBebidas.model.Drink;
 import DarioBebidas.DarioBebidas.model.Orders;
 import DarioBebidas.DarioBebidas.model.User;
-import jakarta.persistence.criteria.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +45,7 @@ public class OrderController {
             @AuthenticationPrincipal UserDetails userDetails
     ) {
         try {
-            // Encontrar usuário logado pelo email (ou username) extraído do token
+
             User user = userRepository.findByEmail(userDetails.getUsername())
                     .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
@@ -59,7 +57,8 @@ public class OrderController {
             Orders order = new Orders(
                     drinks,
                     orderRequest.getPaymentMethod(),
-                    orderRequest.getDeliveryAddress()
+                    orderRequest.getDeliveryAddress(),
+                    orderRequest.getPhone()
             );
             order.setUserId(user.getId());
             orderRepository.save(order);
@@ -91,24 +90,21 @@ public class OrderController {
 
         Orders order = optionalOrder.get();
 
-        // Verifica se o pedido pertence ao usuário logado
         User user = userRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
         if (!order.getUserId().equals(user.getId())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Você não tem permissão para cancelar este pedido");
         }
 
-        // Verifica se o pedido já está em rota de entrega ou entregue
         if (!order.getStatus().equalsIgnoreCase("AGUARDANDO") &&
                 !order.getStatus().equalsIgnoreCase("EM PREPARACAO")) {
             return ResponseEntity.badRequest().body("Não é possível cancelar pedidos que já saíram para entrega");
         }
 
-        // Cancela o pedido
         order.setStatus("CANCELADO");
         orderRepository.save(order);
 
-        return ResponseEntity.ok(order); // retorna o pedido atualizado
+        return ResponseEntity.ok(order); //
     }
 
     @GetMapping
@@ -125,7 +121,6 @@ public class OrderController {
 
     @GetMapping("/user")
     public List<Orders> getOrdersByUser(@AuthenticationPrincipal UserDetails userDetails) {
-        // Recupera usuário autenticado a partir do token JWT
         User user = userRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 

@@ -1,11 +1,9 @@
 package DarioBebidas.DarioBebidas.Jwt;
-
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,30 +12,29 @@ import java.util.Map;
 @Component
 public class JwtUtil {
 
-    private final String SECRET_KEY = "segredo123segredo123segredo123segredo12"; // 32 caracteres = 256 bits
+    private final String SECRET_KEY = "segredo123segredo123segredo123segredo12";
 
     private Key getSignInKey() {
-        byte[] keyBytes = SECRET_KEY.getBytes(); // ou use Decoders.BASE64.decode(...) se usar base64
+        byte[] keyBytes = SECRET_KEY.getBytes();
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
 
-        // Pega o primeiro papel da lista de authorities e salva como "role"
         String role = userDetails.getAuthorities().stream()
                 .findFirst()
                 .map(Object::toString)
                 .orElse("USER");
 
-        claims.put("role", role); // <- ESSENCIAL
-        claims.put("authorities", userDetails.getAuthorities()); // opcional
+        claims.put("role", role);
+        claims.put("authorities", userDetails.getAuthorities());
 
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10h
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

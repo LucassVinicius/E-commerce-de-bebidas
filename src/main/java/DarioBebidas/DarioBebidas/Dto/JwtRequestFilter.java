@@ -1,8 +1,6 @@
 package DarioBebidas.DarioBebidas.Dto;
-
 import DarioBebidas.DarioBebidas.Jwt.JwtUtil;
 import DarioBebidas.DarioBebidas.Service.MyUserDetailsService;
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,7 +29,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         String path = request.getRequestURI();
 
-        // Ignora rotas públicas como /api/auth/*
         if (path.startsWith("/api/auth/")) {
             chain.doFilter(request, response);
             return;

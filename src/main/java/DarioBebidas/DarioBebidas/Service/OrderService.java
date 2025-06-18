@@ -1,10 +1,8 @@
 package DarioBebidas.DarioBebidas.Service;
-
 import DarioBebidas.DarioBebidas.Dto.OrderRequest;
 import DarioBebidas.DarioBebidas.model.Orders;
 import DarioBebidas.DarioBebidas.Repository.OrderRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -18,9 +16,10 @@ public class OrderService {
 
     public Orders createOrder(OrderRequest request) {
         Orders order = new Orders(
-                request.getDrinks(),                 // Lista de Drinks
-                request.getPaymentMethod(),          // Método de Pagamento
-                request.getDeliveryAddress()         // Endereço de Entrega
+                request.getDrinks(),
+                request.getPaymentMethod(),
+                request.getDeliveryAddress(),
+                request.getPhone()
         );
 
         return orderRepository.save(order);

@@ -1,5 +1,4 @@
 package DarioBebidas.DarioBebidas.Controller;
-
 import DarioBebidas.DarioBebidas.Repository.UserRepository;
 import DarioBebidas.DarioBebidas.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.Optional;
 
 @RestController

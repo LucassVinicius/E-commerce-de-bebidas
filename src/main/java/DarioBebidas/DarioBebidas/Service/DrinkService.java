@@ -1,11 +1,8 @@
 package DarioBebidas.DarioBebidas.Service;
-
 import DarioBebidas.DarioBebidas.Repository.DrinkRepository;
 import DarioBebidas.DarioBebidas.model.Drink;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 

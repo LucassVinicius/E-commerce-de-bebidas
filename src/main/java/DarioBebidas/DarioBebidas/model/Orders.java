@@ -1,4 +1,5 @@
 package DarioBebidas.DarioBebidas.model;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,7 +21,9 @@ public class Orders {
     private List<Drink> drinks;
     private String paymentMethod;
     private String status;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "America/Sao_Paulo")
     private LocalDateTime orderTime;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "America/Sao_Paulo")
     private LocalDateTime estimatedDeliveryTime;
     private String deliveryAddress;
     private String phone;

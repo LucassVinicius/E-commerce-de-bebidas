@@ -14,16 +14,14 @@ public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private Long userId;
-
     @ManyToMany
     private List<Drink> drinks;
     private String paymentMethod;
     private String status;
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "America/Sao_Paulo")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDateTime orderTime;
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "America/Sao_Paulo")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDateTime estimatedDeliveryTime;
     private String deliveryAddress;
     private String phone;

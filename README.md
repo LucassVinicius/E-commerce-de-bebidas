@@ -1,7 +1,7 @@
 Dario Bebidas - Site de vendas de bebidas
 (https://dario-bebidas.vercel.app/)
 
-Projeto freelancer desenvolvido com Java, Spring Boot, MySQL, Postman para testar a API, Railway para deploy. No Front-End foi usado Node.js, React.js, Tailwind CSS e vercel para deploy. Este sistema foi criado para um familiar que está com a ideia de fazer vendas de bebidas.
+Projeto freelancer desenvolvido com Java, Spring Boot, MySQL, Postman para testar a API, Railway para deploy. No Front-End foi usado Node.js, React.js e vercel para deploy. Este sistema foi criado para um familiar que está com a ideia de fazer vendas de bebidas.
 
 ---
 

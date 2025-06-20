@@ -1,5 +1,6 @@
 Dario Bebidas - Site de vendas de bebidas
 (https://dario-bebidas.vercel.app/)
+⚠️ Observação: Caso apareça a mensagem “Erro ao buscar bebidas” ou o carregamento demore alguns segundos, isso ocorre porque o back-end está hospedado em um plano gratuito (Railway), que entra em modo de hibernação quando fica inativo. Nesses casos, o servidor pode levar alguns segundos para ser reativado.
 
 Projeto freelancer desenvolvido com Java, Spring Boot, MySQL, Postman para testar a API, Railway para deploy. No Front-End foi usado Node.js, React.js e vercel para deploy. Este sistema foi criado para um familiar que está com a ideia de fazer vendas de bebidas.
 

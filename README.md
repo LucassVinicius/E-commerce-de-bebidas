@@ -22,7 +22,7 @@ Projeto freelancer desenvolvido com Java, Spring Boot, MySQL, Postman para testa
   - Status atual do pedido
 -  Registro e login com autenticação via JWT (email e senha)
 -  Área "Minha Conta" com informações do usuário e todos os seus pedidos
--  Cancelamento de pedidos possível apenas se o status estiver em **Aguardando** ou ** Em Preparação**
+-  Cancelamento de pedidos possível apenas se o status estiver em **Aguardando** ou **Em Preparação**
 
 ● Área de Administração (restrita a usuários com role ADMIN)
 
